@@ -4,18 +4,18 @@ require 'json'
 require 'pry'
 
 
-def format_request_and_send_api_call
-   rating_request = "https://data.cityofnewyork.us/resource/9w7m-hzhe.json"
+def format_request_and_send_api_call(zipcode)
+   rating_request = "https://data.cityofnewyork.us/resource/9w7m-hzhe.json?zipcode=#{zipcode}"
    make_api_call(rating_request)
 end
 
 def make_api_call(request_string)
     uri = URI(request_string) #open portal for app
     response = Net::HTTP.get(uri)
-    @formatted_data = JSON.parse(response) # turn data into something app understands
-    # zipcode = @formatted_data.first["zipcode"]
-    zipcode = "10023"
-    formatting(zipcode, @formatted_data)
+    formatted_data = JSON.parse(response) # turn data into something app understands
+    # zipcode = formatted_data.first["zipcode"]
+
+    organize_hash(formatted_data)
 end
 
 #Removes all resteraunts that are not in the zipcode
@@ -35,11 +35,18 @@ def organize_hash(data)
         attributes = {}
         attributes["action"] = restaurant["violation_description"]
         attributes["address"] = "#{restaurant["building"]} #{restaurant["street"]}  #{restaurant["zipcode"]}"
-        attributes["grade"] = restaurant["grade"] 
+        if restaurant["grade"]
+            attributes["grade"] = restaurant["grade"] 
+        else
+            attributes["grade"] = "Pending"
+        end
         hash[restaurant_name] << attributes
     end
     p hash
     hash
 end
+
+
+
 
 

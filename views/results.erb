@@ -12,29 +12,31 @@
   <!-- ZERO extra html, great for CMS content -->
   <ol id="pretty-style-thang" style="counter-reset: item; 
   list-style: none;">
+    <% @final_hash.each do |name, details|%>
     <li style="    font-size: 16px;
    margin-bottom: 24px;
     line-height: 1.8;
-  display: flex;">Fusce fermentum dolor a lacinia lacinia. Morbi accumsan, elit et pharetra hendrerit, sapien dui tincidunt ipsum, laoreet dignissim libero libero sit amet justo.</li>
-    <li style="    font-size: 16px;
+  display: flex;
+  font-weight: bold;
+  font-size: 1.5em"> <%= name%></li>
+        <li style="    font-size: 16px;
    margin-bottom: 24px;
     line-height: 1.8;
-  display: flex;">Nunc hendrerit dui ac nisl volutpat, vel tempus dui maximus. Cras gravida finibus tellus. Morbi semper arcu sit amet ipsum mattis scelerisque.</li>
-    <li style="    font-size: 16px;
+  display: flex;
+  padding-left:3em">Grade: <%= details.first["grade"]%></li>
+        <li style="    font-size: 16px;
    margin-bottom: 24px;
     line-height: 1.8;
-  display: flex;">Nullam tempor tincidunt luctus. Aliquam mattis augue ante, sed aliquet lectus feugiat sit amet. Maecenas non felis eget est ultricies pulvinar. Fusce magna ipsum, tincidunt et mi ut, imp erdiet euismod erat.</li>
-    <li style="    font-size: 16px;
+  display: flex;
+  padding-left:3em">Violation: <%= details.first["action"]%></li>
+        <li style="    font-size: 16px;
    margin-bottom: 24px;
     line-height: 1.8;
-  display: flex;">Fusce fermentum dolor a lacinia lacinia. Morbi accumsan, elit et pharetra hendrerit, sapien dui tincidunt ipsum, laoreet dignissim libero libero sit amet justo.</li>
-    <li style="    font-size: 16px;
-   margin-bottom: 24px;
-    line-height: 1.8;
-  display: flex;">Nunc hendrerit dui ac nisl volutpat, vel tempus dui maximus. Cras gravida finibus tellus. Morbi semper arcu sit amet ipsum mattis scelerisque.</li>
-    <li style="    font-size: 16px;
-   margin-bottom: 24px;
-    line-height: 1.8;
-  display: flex;">Nullam tempor tincidunt luctus. Aliquam mattis augue ante, sed aliquet lectus feugiat sit amet. Maecenas non felis eget est ultricies pulvinar. Fusce magna ipsum, tincidunt et mi ut, imp erdiet euismod erat.</li>
+  display: flex;
+  padding-left:3em;
+  text-decoration: underline;"><a href= "http://maps.google.com/?q=<%= details.first["address"]%>" target= "_blank"> Address: <%= details.first["address"]%></a></li>
+    <%end%>
   </ol>
 </div>
+
+
