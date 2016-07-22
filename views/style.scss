@@ -1,0 +1,12 @@
+
+/*ol {*/
+/*  padding-left: 20px;*/
+/*}*/
+
+div#pretty-style-thang ol li:before {
+      content: counter(item) ". ";
+      counter-increment: item;
+      color: #D81F32;
+      margin-right: 14px;
+      font-style: italic;
+}
