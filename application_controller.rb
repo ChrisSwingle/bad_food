@@ -1,4 +1,5 @@
 require 'bundler'
+require_relative 'models/model.rb'
 Bundler.require
 
 class ApplicationController < Sinatra::Base
@@ -8,7 +9,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/results' do
-    scss :style
+    format_request_and_send_api_call
     erb :results, :layout => :base
   end
 end

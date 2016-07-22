@@ -23,22 +23,23 @@ def formatting(zipcode, formatted_data)
     formatted_data.keep_if do |elements|
         elements["zipcode"] == zipcode
     end
-    organized_hash(formatted_data)
+    organize_hash(formatted_data)
 end
 
-#creates a hash with the resteraunts as keys and the value ar arrays with the resteraunts actions
-def organized_hash(data)
+#creates a hash with the resteraunts as keys and the value ar arrays with the resteraunts actions address grade
+def organize_hash(data)
     hash = {}
     data.each do |restaurant|
         restaurant_name = restaurant["dba"]
         hash[restaurant_name] ||= []
         attributes = {}
         attributes["action"] = restaurant["violation_description"]
-        attributes["address"] = restaurant["building"] restaurant["street"]  restaurant["zipcode"]
+        attributes["address"] = "#{restaurant["building"]} #{restaurant["street"]}  #{restaurant["zipcode"]}"
         attributes["grade"] = restaurant["grade"] 
         hash[restaurant_name] << attributes
     end
-    binding.pry
+    p hash
+    hash
 end
-format_request_and_send_api_call()
+
 
